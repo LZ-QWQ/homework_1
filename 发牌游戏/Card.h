@@ -1,24 +1,55 @@
 #pragma once
 #include<iostream>
-#include<stdlib.h>
-#include<time.h>
 
 class Cards
 {
 public:
-	Cards();
-	~Cards();
-	void reset();
-	void Print();
-	void Examine();
-private:
-	typedef struct Card//大王为0，1 小王为0，2
+	struct Card//大王为0，1 小王为0，2
 	{
 		short number;//J-11,Q-12,K-13
-		short color;//1-黑桃，2-红桃，3-梅花，4-方块
-		Card* next;
-	}* List;
-	List Cards_0;//头结点
-	List Last;//尾结点
+		short color;//0-黑桃，1-红桃，2-梅花，3-方块
+		bool operator>(const Card & c )
+		{
+			if ((3 <= this->number&&number <= 13) && (3 <= c.number&&c.number <= 13))
+			{
+				if (number > c.number)return true;
+				else if (number == c.number)
+				{
+					if (color < c.color)return true;
+					else return false;
+				}
+				else return false;
+			}
+			else if ((3 <= number&&number <= 13) || (3 <= c.number&&number <= 13))
+			{
+				if (3 <= c.number&&number <= 13)return true;
+				else return false;
+			}
+			else
+			{
+				if (number < c.number)return true;
+				else if (number == -c.number)
+				{
+					if (color < c.color)return true;
+					else return false;
+				}
+				else return false;
+			}
+
+		}
+	};
+	Card Card_0[54] = { 0 };
+	Cards();
+	void shuffle();
+	void deal(Card first[],Card second[],Card third[],Card landlord[]);
+private:
 	int Length = 54;
 };
+
+void print(Cards::Card first[], Cards::Card second[], 
+	Cards::Card third[], Cards::Card landlord[]);
+
+void sort(Cards::Card C[]);
+
+void test(Cards::Card first[], Cards::Card second[],
+	Cards::Card third[], Cards::Card landlord[]);

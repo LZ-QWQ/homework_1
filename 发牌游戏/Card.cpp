@@ -1,66 +1,101 @@
-#include"Card.h"
+﻿#include"Card.h"
+#include<stdlib.h>
+#include<Windows.h>
 
 Cards::Cards()
 {
-	Cards_0 = new Card{ -1,-1,nullptr };
-	List temp = Cards_0;
-	temp->next = new Card{ 0,1,nullptr };
-	temp = temp->next;
-	temp->next = new Card{ 0,2,nullptr };
-	int cout = 1;
-	while (cout <= 13)//1-K 13����
+	for (int i = 0; i < Length - 2; i++)
 	{
-		temp = temp->next;
-		temp->next = new Card{ cout,1,nullptr };
-		temp = temp->next;
-		temp->next = new Card{ cout,2,nullptr };
-		temp = temp->next;
-		temp->next = new Card{ cout,3,nullptr };
-		temp = temp->next;
-		temp->next = new Card{ cout,4,nullptr };
-		cout++;
+		Card_0[i].number = i / 4 + 1;
+		Card_0[i].color = (i + 1) % 4;
+	}
+	Card_0[Length - 2] = { 0,1 };
+	Card_0[Length - 1] = { 0,2 };
+}
+
+void Cards::shuffle()
+{
+	Card temp;
+	for (int i = 0,j; i < Length; i++)
+	{
+		j = (rand() % (Length - i)) + i;
+		temp = Card_0[i];
+		Card_0[i] = Card_0[j];
+		Card_0[j] = temp;
 	}
 }
 
-Cards::~Cards()
+void Cards::deal(Card first[], Card second[], Card third[], Card landlord[])
 {
-	List temp;
-	while (Cards_0->next != nullptr)
+	int i = 0, f = 0, s = 0, t = 0;
+	for (; i < 3; i++)landlord[i] = Card_0[i];
+	for (int j = 0; j < 2; j++, i++,f++)first[f] = Card_0[i];
+	for (int j = 0; j < 2; j++, i++,s++)second[s] = Card_0[i];
+	for (int j = 0; j < 2; j++, i++,t++)third[t] = Card_0[i];
+	while (i < 54)
 	{
-		temp = Cards_0->next;
-		delete Cards_0;
-		Cards_0 = temp;
+		for (int j = 0; j < 3; j++, i++,f++)first[f] = Card_0[i];
+		for (int j = 0; j < 3; j++, i++,s++)second[s] = Card_0[i];
+		for (int j = 0; j < 3; j++, i++,t++)third[t] = Card_0[i];
 	}
-	delete Cards_0;
 }
 
-void Cards::reset()
+void sort(Cards:: Card C[])
 {
-	List temp1 = nullptr, temp2 = Cards_0->next;
-	while (temp2 != nullptr)
+	for (int i = 1; i < 17; i++)
 	{
-		temp1 = temp2;
-		temp2 = temp2->next;
-		delete temp1;
-	}
-	Cards_0 = new Card{ -1,-1,nullptr };
-	List temp = Cards_0;
+		Cards::Card temp = C[i];
+		
+		for (int j = i-1; j >=0 && C[j]>temp; j--)
+		{
+			C[j + 1] = C[j];
 
-	temp->next = new Card{ 0,1,nullptr };
-	temp = temp->next;
-	temp->next = new Card{ 0,2,nullptr };
-	temp = temp->next;
-	int cout = 1;
-	while (cout <= 13)//1-K 13����
-	{
-		temp->next = new Card{ cout,1,nullptr };
-		temp = temp->next;
-		temp->next = new Card{ cout,2,nullptr };
-		temp = temp->next;
-		temp->next = new Card{ cout,3,nullptr };
-		temp = temp->next;
-		temp->next = new Card{ cout,4,nullptr };
-		temp = temp->next;
-		cout++;
+			C[j] = temp;
+		}
 	}
+}
+
+void print(Cards::Card first[], Cards::Card second[], 
+	Cards::Card third[], Cards::Card landlord[])
+{
+	
+	sort(first);
+	sort(second);
+	sort(third);
+	std::cout << "底牌为:   ";
+	for (int i = 0; i < 3; i++)
+	{
+		if (landlord[i].number == 0)
+		{
+			if (landlord[i].color == 1)
+			{
+				
+				system("color 04");
+			}
+		}
+	}
+}
+
+void test(Cards::Card first[], Cards::Card second[],
+	Cards::Card third[], Cards::Card landlord[])
+{
+	Cards test;
+	Cards temp;
+	int i=0;
+	for (int j = 0; j < 2; i++, j++)temp.Card_0[i] = landlord[j];
+	for (int j = 0; j < 17; i++, j++)temp.Card_0[i] = first[j];
+	for (int j = 0; j < 17; i++, j++)temp.Card_0[i] = second[j];
+	for (int j = 0; j < 17; i++, j++)temp.Card_0[i] = third[j];
+	sort(temp.Card_0);
+	sort(test.Card_0);
+	bool result=true;
+	for (int j = 0; j < 54; j++)
+		if (temp.Card_0[j].number != test.Card_0[j].number|| 
+			temp.Card_0[j].color != test.Card_0[j].color)
+		{
+			break;
+			result = false;
+		}
+	if (result)std::cout << "本次发牌成功~( •̀ ω •́ )y~O(∩_∩)O~o(*￣▽￣*)ブ~（づ￣3￣）づ╭❤～\n";
+	else std::cout << "本次发牌失败(发出的牌不满足扑克牌规则)(；′⌒`)\n";
 }
