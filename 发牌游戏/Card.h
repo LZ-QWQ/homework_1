@@ -52,7 +52,7 @@ public:
 	void shuffle();
 	void deal(Card first[],Card second[],Card third[],Card landlord[]);
 private:
-	int Length = 54;
+	static const int Length = 54;
 };
 
 void print(Cards::Card c);

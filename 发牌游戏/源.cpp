@@ -14,7 +14,7 @@ int main()
 	Cards::Card landlord[3];
 	char temp;
 	srand(time(0));
-	cout << "键入任意字符(q除外)并回车发牌(q to quit)----designed by 李政 17070110009:\n";
+	cout << "键入任意字符(q除外)并回车发牌(q to quit)----designed by LZ~! 17070110009:\n";
 	cout << "黑桃为黄色，红桃和大王为粉色，梅花和小王为青色，方块为绿色\n";
 	while (cin >> temp && temp != 'q')
 	{
@@ -33,7 +33,7 @@ int main()
 		prints(third, 17);
 		cout << endl;
 		test(first, second, third, landlord);
-		cout<< "键入任意字符(q除外)并回车以继续发牌(q to quit)----designed by 李政 17070110009:\n";
+		cout<< "键入任意字符(q除外)并回车以继续发牌(q to quit)----designed by LZ~! 17070110009:\n";
 		cout << "黑桃为黄色，红桃和大王为粉色，梅花和小王为青色，方块为绿色\n";
 	}
 	return 0;
