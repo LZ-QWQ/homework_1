@@ -91,7 +91,7 @@ void print(Cards::Card c)
 	default:	std::cout << c.number << "  ";
 		break;
 	}
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
 }
 
 void test(Cards::Card first[], Cards::Card second[],
