@@ -55,25 +55,43 @@ void sort(Cards:: Card C[])
 	}
 }
 
-void print(Cards::Card first[], Cards::Card second[], 
-	Cards::Card third[], Cards::Card landlord[])
+void print(Cards::Card c)
 {
-	
-	sort(first);
-	sort(second);
-	sort(third);
-	std::cout << "底牌为:   ";
-	for (int i = 0; i < 3; i++)
+	HANDLE handle;
+	handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	switch (c.color)
 	{
-		if (landlord[i].number == 0)
-		{
-			if (landlord[i].color == 1)
-			{
-				
-				system("color 04");
-			}
-		}
+	case 0:	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY
+		| FOREGROUND_RED | FOREGROUND_GREEN);//黄色
+		break;
+	case 1:SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY
+		| FOREGROUND_BLUE | FOREGROUND_RED);//粉色
+		break;
+	case 2:SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY
+		| FOREGROUND_BLUE | FOREGROUND_GREEN);//青色
+		break;
+	case 3:SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY
+		| FOREGROUND_GREEN);//绿色
+		break;
 	}
+	switch (c.number)
+	{
+	case 0:std::cout << "joker ";
+		break;
+	case 1:std::cout << "A  ";
+		break;
+	case 11:std::cout << "J  ";
+		break;
+	case 12:std::cout << "Q  ";
+		break;
+	case 13:std::cout << "K  ";
+		break;
+	case 10:std::cout << "10 ";
+		break;
+	default:	std::cout << c.number << "  ";
+		break;
+	}
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
 }
 
 void test(Cards::Card first[], Cards::Card second[],
@@ -96,51 +114,11 @@ void test(Cards::Card first[], Cards::Card second[],
 			break;
 			result = false;
 		}
-	if (result)std::cout << "本次发牌成功~
-( •̀ ω •́ )y~O(∩_∩)O~o(*￣▽￣*)ブ~（づ￣3￣）づ╭❤～\n";
-	else std::cout << "本次发牌失败(发出的牌不满足扑克牌规则)(；′⌒`)\n";
+	if (result)std::cout << "经检查，本次发牌成功~O(∩_∩)O~o(*￣▽￣*)ブ~（づ￣3￣）づ╭❤～\n";
+	else std::cout << "经检查，本次发牌失败(发出的牌不满足扑克牌规则)(；′⌒`)\n";
 }
 
-void print_()
+void prints(Cards::Card c[],int n)
 {
-		CONSOLE_SCREEN_BUFFER_INFO info;
-		HANDLE handle;
-		COORD coord;
-		handle = GetStdHandle(STD_OUTPUT_HANDLE);
-		GetConsoleScreenBufferInfo(handle, &info);
-		coord.X = 20;
-		coord.Y = 10;
-		SetConsoleCursorPosition(handle, coord);
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY
-			| FOREGROUND_RED);
-
-		GetConsoleScreenBufferInfo(handle, &info);
-		coord.X = info.dwCursorPosition.X - 8;
-		coord.Y = info.dwCursorPosition.Y;
-		SetConsoleCursorPosition(handle, coord);
-		for (int i = 0; i < 6; i++)
-		{
-			GetConsoleScreenBufferInfo(handle, &info);
-			coord.X = info.dwCursorPosition.X - 1;
-			coord.Y = info.dwCursorPosition.Y + 1;
-			SetConsoleCursorPosition(handle, coord);
-			std::cout << '|';
-		}
-		GetConsoleScreenBufferInfo(handle, &info);
-		coord.X = info.dwCursorPosition.X - 1;
-		coord.Y = info.dwCursorPosition.Y + 1;
-		SetConsoleCursorPosition(handle, coord);
-		wcout << L"￣￣￣↓";
-		GetConsoleScreenBufferInfo(handle, &info);
-		coord.X = info.dwCursorPosition.X;
-		coord.Y = info.dwCursorPosition.Y - 7;
-		SetConsoleCursorPosition(handle, coord);
-		for (int i = 0; i < 6; i++)
-		{
-			GetConsoleScreenBufferInfo(handle, &info);
-			coord.X = info.dwCursorPosition.X - 1;
-			coord.Y = info.dwCursorPosition.Y + 1;
-			SetConsoleCursorPosition(handle, coord);
-			std::cout << '|';
-		}
+	for (int i = 0; i < n; i++)print(c[i]);
 }

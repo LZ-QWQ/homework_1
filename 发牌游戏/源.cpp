@@ -1,4 +1,4 @@
-#include"Card.h"
+ï»¿#include"Card.h"
 #include<stdlib.h>
 #include<time.h>
 
@@ -6,8 +6,6 @@ using namespace std;
 
 int main()
 {
-	system("Chcp 65001");
-	system("Color 70");
 	Cards card;
 	Cards::Card first[17];
 	Cards::Card second[17];
@@ -15,7 +13,8 @@ int main()
 	Cards::Card landlord[3];
 	char temp;
 	srand(time(0));
-	cout << "¼üÈëÈÎÒâ×Ö·û(q³ýÍâ)²¢»Ø³µ·¢ÅÆ(q to quit)----designed by ÀîÕþ 17070110009:\n";
+	cout << "é”®å…¥ä»»æ„å­—ç¬¦(qé™¤å¤–)å¹¶å›žè½¦å‘ç‰Œ(q to quit)----designed by æŽæ”¿ 17070110009:\n";
+	cout << "é»‘æ¡ƒä¸ºé»„è‰²ï¼Œçº¢æ¡ƒå’Œå¤§çŽ‹ä¸ºç²‰è‰²ï¼Œæ¢…èŠ±å’Œå°çŽ‹ä¸ºé’è‰²ï¼Œæ–¹å—ä¸ºç»¿è‰²\n";
 	while (cin >> temp && temp != 'q')
 	{
 		card.shuffle();
@@ -23,8 +22,18 @@ int main()
 		sort(first);
 		sort(second);
 		sort(third);
+		cout << "åº•ç‰Œ\t";
+		prints(landlord,3);
+		cout << endl << "ç¬¬ä¸€ç»„\t";
+		prints(first, 17);
+		cout << endl << "ç¬¬äºŒç»„\t";
+		prints(second, 17);
+		cout << endl << "ç¬¬ä¸‰ç»„\t";
+		prints(third, 17);
+		cout << endl;
 		test(first, second, third, landlord);
-		cout<< "¼üÈëÈÎÒâ×Ö·û(q³ýÍâ)²¢»Ø³µÒÔ¼ÌÐø·¢ÅÆ(q to quit)----designed by ÀîÕþ 17070110009:\n";
+		cout<< "é”®å…¥ä»»æ„å­—ç¬¦(qé™¤å¤–)å¹¶å›žè½¦ä»¥ç»§ç»­å‘ç‰Œ(q to quit)----designed by æŽæ”¿ 17070110009:\n";
+		cout << "é»‘æ¡ƒä¸ºé»„è‰²ï¼Œçº¢æ¡ƒå’Œå¤§çŽ‹ä¸ºç²‰è‰²ï¼Œæ¢…èŠ±å’Œå°çŽ‹ä¸ºé’è‰²ï¼Œæ–¹å—ä¸ºç»¿è‰²\n";
 	}
 	return 0;
 }

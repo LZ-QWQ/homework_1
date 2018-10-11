@@ -25,17 +25,26 @@ public:
 				if (3 <= c.number&&number <= 13)return true;
 				else return false;
 			}
-			else
+			else if (number == 0 || c.number == 0)
 			{
 				if (number < c.number)return true;
-				else if (number == -c.number)
+				else if (number == c.number)
 				{
 					if (color < c.color)return true;
 					else return false;
 				}
 				else return false;
 			}
-
+			else
+			{
+				if (number > c.number)return true;
+				else if (number == c.number)
+				{
+					if (color < c.color)return true;
+					else return false;
+				}
+				else return false;
+			}
 		}
 	};
 	Card Card_0[54] = { 0 };
@@ -46,10 +55,11 @@ private:
 	int Length = 54;
 };
 
-void print(Cards::Card first[], Cards::Card second[], 
-	Cards::Card third[], Cards::Card landlord[]);
+void print(Cards::Card c);
 
 void sort(Cards::Card C[]);
 
 void test(Cards::Card first[], Cards::Card second[],
 	Cards::Card third[], Cards::Card landlord[]);
+
+void prints(Cards::Card c[],int n);
