@@ -96,6 +96,51 @@ void test(Cards::Card first[], Cards::Card second[],
 			break;
 			result = false;
 		}
-	if (result)std::cout << "本次发牌成功~( •̀ ω •́ )y~O(∩_∩)O~o(*￣▽￣*)ブ~（づ￣3￣）づ╭❤～\n";
+	if (result)std::cout << "本次发牌成功~
+( •̀ ω •́ )y~O(∩_∩)O~o(*￣▽￣*)ブ~（づ￣3￣）づ╭❤～\n";
 	else std::cout << "本次发牌失败(发出的牌不满足扑克牌规则)(；′⌒`)\n";
+}
+
+void print_()
+{
+		CONSOLE_SCREEN_BUFFER_INFO info;
+		HANDLE handle;
+		COORD coord;
+		handle = GetStdHandle(STD_OUTPUT_HANDLE);
+		GetConsoleScreenBufferInfo(handle, &info);
+		coord.X = 20;
+		coord.Y = 10;
+		SetConsoleCursorPosition(handle, coord);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY
+			| FOREGROUND_RED);
+
+		GetConsoleScreenBufferInfo(handle, &info);
+		coord.X = info.dwCursorPosition.X - 8;
+		coord.Y = info.dwCursorPosition.Y;
+		SetConsoleCursorPosition(handle, coord);
+		for (int i = 0; i < 6; i++)
+		{
+			GetConsoleScreenBufferInfo(handle, &info);
+			coord.X = info.dwCursorPosition.X - 1;
+			coord.Y = info.dwCursorPosition.Y + 1;
+			SetConsoleCursorPosition(handle, coord);
+			std::cout << '|';
+		}
+		GetConsoleScreenBufferInfo(handle, &info);
+		coord.X = info.dwCursorPosition.X - 1;
+		coord.Y = info.dwCursorPosition.Y + 1;
+		SetConsoleCursorPosition(handle, coord);
+		wcout << L"￣￣￣↓";
+		GetConsoleScreenBufferInfo(handle, &info);
+		coord.X = info.dwCursorPosition.X;
+		coord.Y = info.dwCursorPosition.Y - 7;
+		SetConsoleCursorPosition(handle, coord);
+		for (int i = 0; i < 6; i++)
+		{
+			GetConsoleScreenBufferInfo(handle, &info);
+			coord.X = info.dwCursorPosition.X - 1;
+			coord.Y = info.dwCursorPosition.Y + 1;
+			SetConsoleCursorPosition(handle, coord);
+			std::cout << '|';
+		}
 }
