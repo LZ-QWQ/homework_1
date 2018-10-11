@@ -6,7 +6,6 @@ using namespace std;
 
 int main()
 {
-	system("color 0f");
 	Cards card;
 	Cards::Card first[17];
 	Cards::Card second[17];
