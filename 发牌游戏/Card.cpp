@@ -61,37 +61,26 @@ void print(Cards::Card c)
 	handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	switch (c.color)
 	{
-	case 0:	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY
-		| FOREGROUND_RED | FOREGROUND_GREEN);//黄色
+	case 0:	SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//黄色
 		break;
-	case 1:SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY
-		| FOREGROUND_BLUE | FOREGROUND_RED);//粉色
+	case 1:SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_RED);//粉色
 		break;
-	case 2:SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY
-		| FOREGROUND_BLUE | FOREGROUND_GREEN);//青色
+	case 2:SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_GREEN);//青色
 		break;
-	case 3:SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY
-		| FOREGROUND_GREEN);//绿色
+	case 3:SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_GREEN);//绿色
 		break;
 	}
 	switch (c.number)
 	{
-	case 0:std::cout << "joker ";
-		break;
-	case 1:std::cout << "A  ";
-		break;
-	case 11:std::cout << "J  ";
-		break;
-	case 12:std::cout << "Q  ";
-		break;
-	case 13:std::cout << "K  ";
-		break;
-	case 10:std::cout << "10 ";
-		break;
-	default:	std::cout << c.number << "  ";
-		break;
+	case 0:std::cout << "joker ";break;
+	case 1:std::cout << "A  ";break;
+	case 11:std::cout << "J  ";break;
+	case 12:std::cout << "Q  ";break;
+	case 13:std::cout << "K  ";break;
+	case 10:std::cout << "10 ";break;
+	default:	std::cout << c.number << "  ";break;
 	}
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+	SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
 }
 
 void test(Cards::Card first[], Cards::Card second[],
